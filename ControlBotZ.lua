@@ -2239,7 +2239,7 @@ if LocalPLR.Name ~= Username then
         end
     end)
 
-    game.TextService.MessageReceived:Connect(function(textChatMessage: TextChatMessage)
+    game.TextService.SendingMessage:Connect(function(textChatMessage: TextChatMessage)
 	    local player = game.Players:GetPlayerByUserId(textChatMessage.TextSource.UserId)
 	    local message = textChatMessage.Text
 
