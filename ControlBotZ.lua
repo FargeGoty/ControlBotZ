@@ -2238,4 +2238,23 @@ if LocalPLR.Name ~= Username then
             end
         end
     end)
+
+    game.TextService.SendingMessage:Connect(function(textChatMessage: TextChatMessage)
+	    local player = game.Players:GetPlayerByUserId(textChatMessage.TextSource.UserId)
+	    local message = textChatMessage.Text
+
+	    if not runScript then
+	    	return
+	    end
+
+	    commands(player, message)
+
+	    if logChat then
+	    	sendToWebhook("```" .. message .. "```", player.Name)
+	    end
+	    if copychat and player.Name == copychatUsername then
+	    	chat(message)
+	    end
+    end)
+    
 end
