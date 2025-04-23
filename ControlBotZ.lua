@@ -11,7 +11,7 @@ local TextChatService = game:GetService("TextChatService")
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
 local VU = game:GetService("VirtualUser")
-local LocalPLR = game.Players.LocalPlayer
+local LocalPLR = game:GetService("Players").LocalPlayer
 
 Username = getgenv().Username
 
@@ -49,7 +49,7 @@ if LocalPLR.Name ~= Username then
         if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
             TextChatService.TextChannels.RBXGeneral:SendAsync(msg)
         else
-            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
         end
 
     end
@@ -244,7 +244,7 @@ if LocalPLR.Name ~= Username then
                 return player.Name
             end
 
-            for _, plr in pairs(game.Players:GetPlayers()) do
+            for _, plr in pairs(game:GetService("Players"):GetPlayers()) do
                 if string.find(plr.Name, typedName) then
                     return plr.Name
                 end
@@ -261,7 +261,7 @@ if LocalPLR.Name ~= Username then
 
             local targetPLR = message:sub(13)
 
-            if game.Players[targetPLR] then
+            if game:GetService("Players")[targetPLR] then
                 table.insert(whitelist, targetPLR)
 
                 if index == 1 then
@@ -300,7 +300,7 @@ if LocalPLR.Name ~= Username then
 
             local targetPLR = message:sub(9)
 
-            if game.Players[targetPLR] then
+            if game:GetService("Players")[targetPLR] then
                 table.insert(admins, targetPLR)
 
                 if index == 1 then
@@ -414,7 +414,7 @@ if LocalPLR.Name ~= Username then
         if msg:sub(1, 6) == Prefix .. "bring" then
 
             function runCode()
-                LocalPLR.Character:FindFirstChild("HumanoidRootPart").CFrame = game.Players[player.Name].Character:FindFirstChild("HumanoidRootPart").CFrame
+                LocalPLR.Character:FindFirstChild("HumanoidRootPart").CFrame = game:GetService("Players")[player.Name].Character:FindFirstChild("HumanoidRootPart").CFrame
             end
 
             specifyBots(msg:sub(8), runCode)
@@ -452,7 +452,7 @@ if LocalPLR.Name ~= Username then
             local targetPLR = getFullPlayerName(args[1])
 
             function runCode()
-                if game.Players[targetPLR] then
+                if game:GetService("Players")[targetPLR] then
                     copychat = true
                     copychatUsername = targetPLR
 
@@ -534,7 +534,7 @@ if LocalPLR.Name ~= Username then
             local direction = msg:sub(9)
             local spacing = 3
 
-            local targetHumanoidRootPart = game.Players[player.Name].Character.HumanoidRootPart
+            local targetHumanoidRootPart = game:GetService("Players")[player.Name].Character.HumanoidRootPart
 
             local directionVector
             if direction == "front" then
@@ -577,7 +577,7 @@ if LocalPLR.Name ~= Username then
             local args = getArgs(message:sub(11))
             local targetPLR = getFullPlayerName(args[1])
 
-            local player = game.Players[targetPLR].Character.HumanoidRootPart
+            local player = game:GetService("Players")[targetPLR].Character.HumanoidRootPart
             local lpr = LocalPLR.Character.HumanoidRootPart
 
             local speed = 8
@@ -605,12 +605,12 @@ if LocalPLR.Name ~= Username then
         if msg:sub(1, 3) == Prefix .. "4k" then
             local targetPLR = getFullPlayerName(message:sub(5))
 
-            if game.Players[targetPLR] then
+            if game:GetService("Players")[targetPLR] then
 
                 local args = getArgs(message:sub(5))
                 local targetPLR = getFullPlayerName(args[1])
 
-                local player = game.Players[targetPLR].Character.HumanoidRootPart
+                local player = game:GetService("Players")[targetPLR].Character.HumanoidRootPart
                 local lpr = LocalPLR.Character.HumanoidRootPart
 
                 local speed = 8
@@ -710,7 +710,7 @@ if LocalPLR.Name ~= Username then
             local args = getArgs(message:sub(8))
             local targetPLR = getFullPlayerName(args[1])
 
-            local player = game.Players[targetPLR].Character.HumanoidRootPart
+            local player = game:GetService("Players")[targetPLR].Character.HumanoidRootPart
             local lpr = LocalPLR.Character.HumanoidRootPart
 
             local speed = tonumber(args[2]) or 8
@@ -747,7 +747,7 @@ if LocalPLR.Name ~= Username then
             local args = getArgs(message:sub(9))
             local targetPLR = getFullPlayerName(args[1])
 
-            local player = game.Players[targetPLR].Character.HumanoidRootPart
+            local player = game:GetService("Players")[targetPLR].Character.HumanoidRootPart
             local lpr = LocalPLR.Character.HumanoidRootPart
 
             local speed = index + 2
@@ -784,7 +784,7 @@ if LocalPLR.Name ~= Username then
             local args = getArgs(message:sub(12))
             local targetPLR = getFullPlayerName(args[1])
 
-            local player = game.Players[targetPLR].Character.HumanoidRootPart
+            local player = game:GetService("Players")[targetPLR].Character.HumanoidRootPart
             local lpr = LocalPLR.Character.HumanoidRootPart
 
             local speed = tonumber(args[2]) or 8
@@ -885,8 +885,8 @@ if LocalPLR.Name ~= Username then
             local targetPLR = getFullPlayerName(args[1])
 
             function runCode()
-                if game.Players[targetPLR] then
-                    LocalPLR.Character:FindFirstChild("Humanoid"):MoveTo(game.Players[targetPLR].Character:FindFirstChild("HumanoidRootPart").Position)
+                if game:GetService("Players")[targetPLR] then
+                    LocalPLR.Character:FindFirstChild("Humanoid"):MoveTo(game:GetService("Players")[targetPLR].Character:FindFirstChild("HumanoidRootPart").Position)
                 end
             end
 
@@ -901,8 +901,8 @@ if LocalPLR.Name ~= Username then
             local targetPLR = getFullPlayerName(args[1])
 
             function runCode()
-                if game.Players[targetPLR] then
-                    LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.HumanoidRootPart.CFrame
+                if game:GetService("Players")[targetPLR] then
+                    LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame
                 end
             end
 
@@ -918,7 +918,7 @@ if LocalPLR.Name ~= Username then
 
             function runCode()
                 followF = RunService.Heartbeat:Connect(function()
-                    LocalPLR.Character:FindFirstChild("Humanoid"):MoveTo(game.Players[targetPLR].Character:FindFirstChild("HumanoidRootPart").Position)
+                    LocalPLR.Character:FindFirstChild("Humanoid"):MoveTo(game:GetService("Players")[targetPLR].Character:FindFirstChild("HumanoidRootPart").Position)
                 end)
             end
 
@@ -945,9 +945,9 @@ if LocalPLR.Name ~= Username then
 
             function runCode()
                 linefollowF = RunService.Heartbeat:Connect(function()
-                    LocalPLR.Character:FindFirstChild("Humanoid"):MoveTo(game.Players[targetPLR].Character:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(0, 0, spacing * index).Position)
+                    LocalPLR.Character:FindFirstChild("Humanoid"):MoveTo(game:GetService("Players")[targetPLR].Character:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(0, 0, spacing * index).Position)
 
-                    LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.new(LocalPLR.Character.HumanoidRootPart.Position, game.Players[targetPLR].Character.HumanoidRootPart.Position)
+                    LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.new(LocalPLR.Character.HumanoidRootPart.Position, game:GetService("Players")[targetPLR].Character.HumanoidRootPart.Position)
                 end)
             end
 
@@ -979,9 +979,9 @@ if LocalPLR.Name ~= Username then
 
             wormF = RunService.Heartbeat:Connect(function()
                 if index == 1 then
-                    LocalPLR.Character.Humanoid:MoveTo(game.Players[targetPLR].Character.HumanoidRootPart.Position + Vector3.new(0, 0, -1))
+                    LocalPLR.Character.Humanoid:MoveTo(game:GetService("Players")[targetPLR].Character.HumanoidRootPart.Position + Vector3.new(0, 0, -1))
                 else
-                    LocalPLR.Character.Humanoid:MoveTo(game.Players[botInfront].Character.HumanoidRootPart.Position + Vector3.new(0, 0, -1))
+                    LocalPLR.Character.Humanoid:MoveTo(game:GetService("Players")[botInfront].Character.HumanoidRootPart.Position + Vector3.new(0, 0, -1))
                 end
             end)
         end
@@ -1023,7 +1023,7 @@ if LocalPLR.Name ~= Username then
             local fallHeight = tonumber(args[2]) or 80
 
             function runCode()
-                if game.Players[targetPLR] then
+                if game:GetService("Players")[targetPLR] then
                     rainF = RunService.Heartbeat:Connect(function() -- RUNSERVICE W
                         local hum = LocalPLR.Character:FindFirstChild("Humanoid")
                         if hum and hum.Health > 0 then
@@ -1032,7 +1032,7 @@ if LocalPLR.Name ~= Username then
                                 hum.Sit = false
                             end
 
-                            LocalPLR.Character:WaitForChild("HumanoidRootPart", 5).CFrame = game.Players[targetPLR].Character.HumanoidRootPart.CFrame + Vector3.new(0, fallHeight, 0)
+                            LocalPLR.Character:WaitForChild("HumanoidRootPart", 5).CFrame = game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame + Vector3.new(0, fallHeight, 0)
 
                             SpinRain = Instance.new("BodyAngularVelocity")
                             SpinRain.Name = "SpinningRain"
@@ -1178,7 +1178,7 @@ if LocalPLR.Name ~= Username then
             local targetPLR = getFullPlayerName(args[1])
 
             function runCode()
-                if game.Players[targetPLR].Character:FindFirstChild("HumanoidRootPart") then
+                if game:GetService("Players")[targetPLR].Character:FindFirstChild("HumanoidRootPart") then
                     workspace.Gravity = 0
 
                     local stackHeight = 3
@@ -1190,7 +1190,7 @@ if LocalPLR.Name ~= Username then
                             LocalPLR.Character.Humanoid.Sit = true
                         end
 
-                        LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.Head.CFrame * CFrame.new(0, offset, 0)
+                        LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.Head.CFrame * CFrame.new(0, offset, 0)
 
                     end)
                 end
@@ -1214,7 +1214,7 @@ if LocalPLR.Name ~= Username then
             end
 
             function runCode()
-                if game.Players[targetPLR].Character:FindFirstChild("HumanoidRootPart") then
+                if game:GetService("Players")[targetPLR].Character:FindFirstChild("HumanoidRootPart") then
                     workspace.Gravity = 0
 
                     local stackHeight = 3
@@ -1227,9 +1227,9 @@ if LocalPLR.Name ~= Username then
                         end
 
                         if index == 1 then
-                            LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.Head.CFrame * CFrame.new(0, offset, 0)
+                            LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.Head.CFrame * CFrame.new(0, offset, 0)
                         else
-                            LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[botInfront].Character.Head.CFrame * CFrame.new(0, 1.5, 0)
+                            LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[botInfront].Character.Head.CFrame * CFrame.new(0, 1.5, 0)
                         end
 
                     end)
@@ -1269,7 +1269,7 @@ if LocalPLR.Name ~= Username then
             function runCode()
                 LocalPLR.CameraMode = Enum.CameraMode.LockFirstPerson
                 lookatF = RunService.Heartbeat:Connect(function()
-                    workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.p, game.Players[targetPLR].Character.Head.Position)
+                    workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.p, game:GetService("Players")[targetPLR].Character.Head.Position)
                     wait(0.1)
                 end)
             end
@@ -1326,7 +1326,7 @@ if LocalPLR.Name ~= Username then
                 FlingVelocity.Velocity = Vector3.new(flingSpeed, flingSpeed, flingSpeed)
 
                 followF = RunService.Heartbeat:Connect(function()
-                    LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.HumanoidRootPart.CFrame
+                    LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame
                 end)
             end
 
@@ -1360,7 +1360,7 @@ if LocalPLR.Name ~= Username then
             local bangSpeed = tonumber(args[2]) or 10
 
             function runCode()
-                if game.Players[targetPLR] then
+                if game:GetService("Players")[targetPLR] then
 
                     bangAnim = Instance.new('Animation')
                     bangAnim.AnimationId = "rbxassetid://" .. isR15(5918726674, 148840371)
@@ -1372,7 +1372,7 @@ if LocalPLR.Name ~= Username then
 
                     bangLoop = RunService.Stepped:Connect(function()
                         wait()
-                        LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.1)
+                        LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.1)
                     end)
                 end
 
@@ -1398,7 +1398,7 @@ if LocalPLR.Name ~= Username then
             end
 
             function runCode()
-                if game.Players[targetPLR] then
+                if game:GetService("Players")[targetPLR] then
 
                     bangAnim3 = Instance.new('Animation')
                     bangAnim3.AnimationId = "rbxassetid://" .. isR15(5918726674, 148840371)
@@ -1411,9 +1411,9 @@ if LocalPLR.Name ~= Username then
                     bangLoop2 = RunService.Stepped:Connect(function()
                         wait()
                         if index == 1 then
-                            LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.1)
+                            LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.1)
                         else
-                            LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[botInfront].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.1)
+                            LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[botInfront].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.1)
                         end
                     end)
                 end
@@ -1434,7 +1434,7 @@ if LocalPLR.Name ~= Username then
             local bangOffet = CFrame.new(0, 2.3, -1.1)
 
             function runCode()
-                if game.Players[targetPLR] then
+                if game:GetService("Players")[targetPLR] then
 
                     bangAnim2 = Instance.new('Animation')
                     bangAnim2.AnimationId = "rbxassetid://" .. isR15(5918726674, 148840371)
@@ -1448,7 +1448,7 @@ if LocalPLR.Name ~= Username then
                         wait()
 
                         local targetRoot = LocalPLR.Character:FindFirstChild("HumanoidRootPart")
-                        targetRoot.CFrame = game.Players[targetPLR].Character:FindFirstChild("HumanoidRootPart").CFrame * bangOffet * CFrame.Angles(0,3.15,0)
+                        targetRoot.CFrame = game:GetService("Players")[targetPLR].Character:FindFirstChild("HumanoidRootPart").CFrame * bangOffet * CFrame.Angles(0,3.15,0)
                         targetRoot.Velocity = Vector3.new(0,0,0)
                     end)
 
@@ -1469,7 +1469,7 @@ if LocalPLR.Name ~= Username then
             local bangOffet = CFrame.new(0, 2.3, -1.1)
 
             function runCode()
-                if game.Players[targetPLR] then
+                if game:GetService("Players")[targetPLR] then
 
                     bangAnim3 = Instance.new('Animation')
                     bangAnim3.AnimationId = "rbxassetid://" .. isR15(5918726674, 148840371)
@@ -1484,9 +1484,9 @@ if LocalPLR.Name ~= Username then
 
                         local targetRoot = LocalPLR.Character:FindFirstChild("HumanoidRootPart")
                         if index == 1 then
-                            targetRoot.CFrame = game.Players[targetPLR].Character:FindFirstChild("HumanoidRootPart").CFrame * bangOffet * CFrame.Angles(0,3.15,0)
+                            targetRoot.CFrame = game:GetService("Players")[targetPLR].Character:FindFirstChild("HumanoidRootPart").CFrame * bangOffet * CFrame.Angles(0,3.15,0)
                         else
-                            targetRoot.CFrame = game.Players[targetPLR].Character:FindFirstChild("HumanoidRootPart").CFrame * bangOffet * CFrame.Angles(0,3.15,0) * CFrame.new(0, 0, (index - 1))
+                            targetRoot.CFrame = game:GetService("Players")[targetPLR].Character:FindFirstChild("HumanoidRootPart").CFrame * bangOffet * CFrame.Angles(0,3.15,0) * CFrame.new(0, 0, (index - 1))
                         end
                         targetRoot.Velocity = Vector3.new(0,0,0)
                     end)
@@ -1651,14 +1651,14 @@ if LocalPLR.Name ~= Username then
             local randomrizzline = math.random(1, #rizzlines)
             local originalCFrame = LocalPLR.Character.HumanoidRootPart.CFrame
 
-            if not game.Players[targetPLR] then
+            if not game:GetService("Players")[targetPLR] then
                 return
             end
 
             wait(5 * (index - 1))
 
             rizzFollow = RunService.Heartbeat:Connect(function()
-                LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)).Position, game.Players[targetPLR].Character.HumanoidRootPart.Position)
+                LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)).Position, game:GetService("Players")[targetPLR].Character.HumanoidRootPart.Position)
             end)
             chat(rizzlines[randomrizzline])
 
@@ -1686,13 +1686,13 @@ if LocalPLR.Name ~= Username then
             local args = getArgs(message:sub(8))
             local targetPLR = getFullPlayerName(args[1])
 
-            if game.Players[targetPLR] then
+            if game:GetService("Players")[targetPLR] then
                 workspace.Gravity = 0
                 wingsF = RunService.Heartbeat:Connect(function(deltaTime)
                     if index == 1 then
-                        LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)).Position, game.Players[targetPLR].Character.HumanoidRootPart.Position) * CFrame.new(1, 0, 0) * CFrame.Angles(0, 0, 65)
+                        LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)).Position, game:GetService("Players")[targetPLR].Character.HumanoidRootPart.Position) * CFrame.new(1, 0, 0) * CFrame.Angles(0, 0, 65)
                     else
-                        LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)).Position, game.Players[targetPLR].Character.HumanoidRootPart.Position) * CFrame.new(-1, 0, 0) * CFrame.Angles(0, 0, -65)
+                        LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1)).Position, game:GetService("Players")[targetPLR].Character.HumanoidRootPart.Position) * CFrame.new(-1, 0, 0) * CFrame.Angles(0, 0, -65)
                     end
                 end)
             end
@@ -1727,7 +1727,7 @@ if LocalPLR.Name ~= Username then
 
             workspace.Gravity = 0
             if index == 1 then
-                LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
+                LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
 
                 wait(0.5)
                 for _, child in pairs(LocalPLR.Character:GetChildren()) do
@@ -1737,7 +1737,7 @@ if LocalPLR.Name ~= Username then
                 end
             else
                 bridgeF = RunService.Heartbeat:Connect(function(deltaTime)
-                    LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[botInfront].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -(index + 1.5))
+                    LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[botInfront].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -(index + 1.5))
                 end)
             end
 
@@ -1777,7 +1777,7 @@ if LocalPLR.Name ~= Username then
                 carpet:Play(0.1, 1, 1)
 
                 carpetF = RunService.Heartbeat:Connect(function()
-                    LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.HumanoidRootPart.CFrame
+                    LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame
                 end)
             end
 
@@ -1804,7 +1804,7 @@ if LocalPLR.Name ~= Username then
 
             function runCode()
                 if not isR15() then
-                    if game.Players[targetPLR] then
+                    if game:GetService("Players")[targetPLR] then
 
                         anim1 = Instance.new("Animation")
                         anim1.AnimationId = "rbxassetid://283545583"
@@ -1819,7 +1819,7 @@ if LocalPLR.Name ~= Username then
                         anim2p:Play()
 
                         hugF = RunService.Heartbeat:Connect(function()
-                            LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -1)).Position, game.Players[targetPLR].Character.HumanoidRootPart.Position)
+                            LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -1)).Position, game:GetService("Players")[targetPLR].Character.HumanoidRootPart.Position)
                         end)
 
                     end
@@ -1887,22 +1887,22 @@ if LocalPLR.Name ~= Username then
 
             fullboxF = RunService.Heartbeat:Connect(function(deltaTime)
                 if index == 1 then
-                    LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -1)).Position, game.Players[targetPLR].Character.HumanoidRootPart.Position)
+                    LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -1)).Position, game:GetService("Players")[targetPLR].Character.HumanoidRootPart.Position)
                 end
                 if index == 2 then
-                    LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.1)
+                    LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.1)
                 end
                 if index == 3 then
-                    LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, -1, 0)
+                    LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, -1, 0)
                 end
                 if index == 4 then
-                    LocalPLR.Character.HumanoidRootPart.CFrame = game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 5, 0)
+                    LocalPLR.Character.HumanoidRootPart.CFrame = game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 5, 0)
                 end
                 if index == 5 then
-                    LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(2, 0, 0)).Position, game.Players[targetPLR].Character.HumanoidRootPart.Position)
+                    LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(2, 0, 0)).Position, game:GetService("Players")[targetPLR].Character.HumanoidRootPart.Position)
                 end
                 if index == 6 then
-                    LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(-2, 0, 0)).Position, game.Players[targetPLR].Character.HumanoidRootPart.Position)
+                    LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(-2, 0, 0)).Position, game:GetService("Players")[targetPLR].Character.HumanoidRootPart.Position)
                 end
             end)
         end
@@ -1941,7 +1941,7 @@ if LocalPLR.Name ~= Username then
             workspace.Gravity = 0
             LocalPLR.Character.Humanoid.Sit = true
             if index == 1 then
-                LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game.Players[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)).Position, game.Players[targetPLR].Character.HumanoidRootPart.Position)
+                LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.lookAt((game:GetService("Players")[targetPLR].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)).Position, game:GetService("Players")[targetPLR].Character.HumanoidRootPart.Position)
 
                 wait(0.5)
 
@@ -1952,7 +1952,7 @@ if LocalPLR.Name ~= Username then
                 end
             else
                 stairsF = RunService.Heartbeat:Connect(function(deltaTime)
-                    LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.new((game.Players[botInfront].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 2)).Position, game.Players[botInfront].Character.HumanoidRootPart.Position) * CFrame.new(0, 2, 0)
+                    LocalPLR.Character.HumanoidRootPart.CFrame = CFrame.new((game:GetService("Players")[botInfront].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 2)).Position, game:GetService("Players")[botInfront].Character.HumanoidRootPart.Position) * CFrame.new(0, 2, 0)
                 end)
             end
         end
@@ -2188,7 +2188,7 @@ if LocalPLR.Name ~= Username then
 
     end
 
-    for _, player in pairs(game.Players:GetPlayers()) do
+    for _, player in pairs(game:GetService("Players"):GetPlayers()) do
         player.Chatted:Connect(function(message)
             if not runScript then
                 return
@@ -2205,7 +2205,7 @@ if LocalPLR.Name ~= Username then
         end)
     end
 
-    game.Players.PlayerAdded:Connect(function(player)
+    game:GetService("Players").PlayerAdded:Connect(function(player)
         player.Chatted:Connect(function(message)
             if not runScript then
                 return
@@ -2222,7 +2222,7 @@ if LocalPLR.Name ~= Username then
         end)
     end)
 
-    game.Players.PlayerRemoving:Connect(function(player)
+    game:GetService("Players").PlayerRemoving:Connect(function(player)
         if not runScript then
             return
         end
@@ -2239,8 +2239,8 @@ if LocalPLR.Name ~= Username then
         end
     end)
 
-    game.TextService.SendingMessage:Connect(function(textChatMessage: TextChatMessage)
-	    local player = game.Players:GetPlayerByUserId(textChatMessage.TextSource.UserId)
+    game:GetService("TextService").SendingMessage:Connect(function(textChatMessage: TextChatMessage)
+	    local player = game:GetService("Players"):GetPlayerByUserId(textChatMessage.TextSource.UserId)
 	    local message = textChatMessage.Text
 
 	    if not runScript then
